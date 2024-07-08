@@ -1,7 +1,9 @@
 package com.example.pizza;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -12,10 +14,10 @@ public class Pizza extends EntityBase{
     private String name;   
     private String description;
     private String url;
-    private List<Ingredient> ingredients;
+    private Set<Ingredient> ingredients;
  
  
-    protected Pizza(UUID id, String name, String description, String url, List<Ingredient> ingredients) {
+    protected Pizza(UUID id, String name, String description, String url, Set<Ingredient> ingredients) {
         super(id);
         this.name = name;        
         this.description = description;
@@ -44,18 +46,17 @@ public class Pizza extends EntityBase{
         return url;
     }
     public List<Ingredient> getIngredients(){                      
+        //ingredients.stream().toList() inmutabilidad
         return new ArrayList<>(ingredients);
     }
-    public void addIngredient(Ingredient ingredient){
-        if(!ingredients.contains(ingredient)){
-            ingredients.add(ingredient);
-        }       
+    public void addIngredient(Ingredient ingredient){        
+        ingredients.add(ingredient);        
     }
     public void removeIngredient(Ingredient ingredient){
         ingredients.remove(ingredient);
     }
     public static Pizza create(UUID id, String name, String Description, String url){
-        return new Pizza(id, name, Description, url, new ArrayList<>());
+        return new Pizza(id, name, Description, url, new HashSet<>());
     }
      
 }
