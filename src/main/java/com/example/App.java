@@ -19,7 +19,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        Ingredient ingredient = Ingredient.create(UUID.randomUUID(), "tomate", 1D);
+        UUID id = UUID.randomUUID();
+        
         
         Pizza pizza = Pizza
             .builder()
@@ -33,8 +34,8 @@ public class App {
                 "carbonara",
                 "la mejor del mundo",
                 "url");*/
-        pizza.addIngredient(ingredient);
-        pizza.addIngredient(ingredient);
+        pizza.addIngredient(Ingredient.create(id, "tomate", 1.0D));
+        pizza.addIngredient(Ingredient.create(id, "tomate", 1.0D));
         //esto no se debería permitir
         //pizza.getIngredients().add(ingredient);
         System.err.println(pizza.getPrice());
