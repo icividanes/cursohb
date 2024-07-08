@@ -1,0 +1,37 @@
+1. Que es un objeto
+    -Algo que representa una entidad del mundo real
+
+        -atributos
+            propiedades del objeto(estado del objeto)
+        -metodos
+            acciones que nos van a permitir leer el estado o
+            modificar el estado.
+
+        encapsulacion
+            que todos los atributos deben de ser privados
+            y solo expuestos a traves de metodos
+
+    pizza{
+        id,
+        name,
+        description,
+        url,
+        precio->solo lectura->sum(precio-ingredients) * 1.2
+        ingredients: [{id,name,precio}]
+    }
+
+    la pizza se puede crear
+    la pizza se puede modificar
+    se le pueden añadir un ingrediente
+    se le puede eliminar un ingrediente
+
+    abstract->clase de la que no se pueden crear instancias
+
+    public->la variable de instancia puede acceder.
+        Foo foo = new Foo()
+        foo.    
+    private->la variable de instancia no puede acceder
+        this==variable de instancia pero puede acceder a lo private        
+    protected->los herederos tienen acceso y no la instancia
+
+    la herencia->palabra reservada extends
