@@ -2,11 +2,11 @@ package com.example;
 
 import java.util.UUID;
 
-import org.hibernate.Session;
+/*import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;*/
 
 import com.example.pizza.Ingredient;
 import com.example.pizza.Pizza;
@@ -32,11 +32,11 @@ public class App {
 
         // EntityBase entiy = new EntityBase(UUID.randomUUID());
         System.out.println("Hello World!");
-        setup();
+        //setup();
     }
 
     public static void setup() {
-        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+        /*final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .build();
 
         SessionFactory sessionFactory = new MetadataSources(registry)
@@ -59,6 +59,6 @@ public class App {
 
         // var result = session.get(Events.class, 1);
 
-        session.close();
+        session.close();*/
     }
 }
