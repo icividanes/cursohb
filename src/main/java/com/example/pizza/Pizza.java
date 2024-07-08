@@ -43,7 +43,7 @@ public class Pizza extends EntityBase{
     public String getUrl(){
         return url;
     }
-    public List<Ingredient> getIngredients(){                
+    public List<Ingredient> getIngredients(){                      
         return new ArrayList<>(ingredients);
     }
     public void addIngredient(Ingredient ingredient){

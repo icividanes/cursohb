@@ -10,4 +10,15 @@ public abstract class EntityBase {
     public UUID getId(){   //getter
         return id;
     }
+    @Override
+    public int hashCode() {
+       return id.hashCode();
+    }
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof EntityBase e){
+            return e.id.equals(this.id);
+        }
+        return false;
+    }
 }
