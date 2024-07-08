@@ -20,10 +20,19 @@ public class App {
     public static void main(String[] args) {
 
         Ingredient ingredient = Ingredient.create(UUID.randomUUID(), "tomate", 1D);
-        Pizza pizza = Pizza.create(UUID.randomUUID(),
+        
+        Pizza pizza = Pizza
+            .builder()
+            .setId(UUID.randomUUID())
+            .setName("carbonara")
+            .setDescription("pizza excelente")
+            .setUrl("url")
+            .build();
+
+        /*Pizza pizza = Pizza.create(UUID.randomUUID(),
                 "carbonara",
                 "la mejor del mundo",
-                "url");
+                "url");*/
         pizza.addIngredient(ingredient);
         pizza.addIngredient(ingredient);
         //esto no se debería permitir

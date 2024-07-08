@@ -58,6 +58,34 @@ public class Pizza extends EntityBase{
     public static Pizza create(UUID id, String name, String Description, String url){
         return new Pizza(id, name, Description, url, new HashSet<>());
     }
-     
+
+    public static PizzaBuilder builder(){
+        return new Builder();
+    } 
+    private static class Builder implements PizzaBuilder{
+        private UUID id;
+        private String name;   
+        private String description;
+        private String url;        
+        public Builder setName(String value){
+            this.name = value;
+            return this;
+        }
+        public Builder setDescription(String value){
+            this.description = value;
+            return this;
+        }
+        public Builder setUrl(String value){
+            this.url = value;
+            return this;
+        }
+        public Builder setId(UUID id){
+            this.id = id;
+            return this;
+        }
+        public Pizza build(){
+            return new Pizza(id, name, description, url, new HashSet<>());
+        }
+    }
 }
 
