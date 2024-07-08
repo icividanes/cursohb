@@ -25,8 +25,9 @@ public class App {
                 "la mejor del mundo",
                 "url");
         pizza.addIngredient(ingredient);
+        pizza.addIngredient(ingredient);
         //esto no se debería permitir
-        pizza.getIngredients().add(ingredient);
+        //pizza.getIngredients().add(ingredient);
         System.err.println(pizza.getPrice());
 
         // EntityBase entiy = new EntityBase(UUID.randomUUID());
