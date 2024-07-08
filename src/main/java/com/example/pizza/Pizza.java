@@ -8,6 +8,7 @@ import java.util.UUID;
  
 public class Pizza extends EntityBase{
  
+    private static final double PROFIT = 1.2D;
     private String name;   
     private String description;
     private String url;
@@ -34,7 +35,7 @@ public class Pizza extends EntityBase{
         for (Ingredient ingredient : ingredients) {
             price +=ingredient.getPrice();
         }
-        return price*1.2;
+        return price*Pizza.PROFIT;
     }
     public String getDescription(){
         return description;
@@ -42,8 +43,8 @@ public class Pizza extends EntityBase{
     public String getUrl(){
         return url;
     }
-    public List<Ingredient> getIngredient(){
-        return ingredients;
+    public List<Ingredient> getIngredients(){                
+        return new ArrayList<>(ingredients);
     }
     public void addIngredient(Ingredient ingredient){
         ingredients.add(ingredient);
@@ -56,3 +57,4 @@ public class Pizza extends EntityBase{
     }
      
 }
+
