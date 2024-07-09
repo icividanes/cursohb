@@ -32,7 +32,7 @@ public class App {
             
         CustomerRepository repositoy = new CustomerRepository();
         ServiceCustomerUpdate service = new ServiceCustomerUpdate(repositoy);
-        service.update();        
+        service.update(1);        
 
         Consumer<Object> mock = (obj)->{};
 

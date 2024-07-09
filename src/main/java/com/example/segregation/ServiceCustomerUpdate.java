@@ -7,9 +7,8 @@ public class ServiceCustomerUpdate {
         
 
     }
-    public void update(){
-        Customer customer = new Customer();
-        this.repository.get(null);
+    public void update(Integer id){        
+        Customer customer = this.repository.get(id);        
         this.repository.update(customer);
     }
 
