@@ -1,0 +1,36 @@
+1.Dominio (DDD)
+    clases logica 
+    https://www.amazon.es/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215/ref=asc_df_0321125215/?tag=googshopes-21&linkCode=df0&hvadid=699717042931&hvpos=&hvnetw=g&hvrand=7490835965301806697&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9047056&hvtargid=pla-449269547899&psc=1&mcid=ef99ca9049393c69a7b3a2c5bb278669&gad_source=1
+
+    Entidades
+        Clases que son iguales cuando su id es igual
+    Value Object
+        Clase que es igual a otra cuando todos los atributos
+        son iguales
+2.Controlador(add,update,get,remove)
+3.Services(add,update,get,remove)
+    Validar la Entidades
+    Crear transaciones
+    Logger
+    Persistirla
+    Mappear
+4.Persistencia(add,update,get,remove)
+    Recuperar o persistir la entidad en bb.dd,servicios,etc
+
+1->4->3->2
+
+1.Dominio
+2.Features
+    add
+    update
+    remove
+    get
+
+    Controlador->Mediator->Servicio->Persistencia
+                            Validador
+                            transaciones
+                            Logger
+
+https://www.jimmybogard.com/vertical-slice-architecture/
+https://github.com/sizovs/PipelinR
+https://github.com/jbogard/MediatR
