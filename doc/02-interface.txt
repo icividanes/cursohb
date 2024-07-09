@@ -1,0 +1,51 @@
+Clase
+    Implementacion
+
+    class Foo{
+        public void writer(){
+            System.out.prinln("Hello World");
+        }
+    }
+    Foo foo = new Foo()
+    foo.writer();
+Interface
+    abstraccion no se puede instanciar
+
+    public interface IFoo{
+        public void writer();
+    }
+
+Clase+Interface
+          (SusTipo)      (Tipo)
+    class Foo implements IFoo{
+        public void writer(){
+            System.out.prinln("Hello World");
+        }
+    }
+Trabajo con abstracciones y no con implementaciones
+
+Los objetos del sistema pueden ser sustituidos por
+sus sustipos sin alterar el correcto functionamiento del progama
+    //Ok
+    IFoo foo = new Foo();
+    foo.writer();
+
+    //No-Estas creando una dependencia fuerte
+    Foo foo = new Foo();
+    foo.writer()
+
+https://es.wikipedia.org/wiki/SOLID
+
+Una interface funcional es aquella que solo tiene un metodo abstracto
+
+Se pueden crear instancias con lambdas sin necesidad de implementarlas
+
+public interface Operations<T>{
+    T apply(T a, T b)
+}
+
+List<Operations<int>> operations = new ArrayList<>();
+operations.add((a,b)->a+b)
+operations.add((a,b)->a-b)
+operations.add((a,b)->a*b)
+operations.add((a,b)->a/b)

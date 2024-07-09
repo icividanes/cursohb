@@ -1,0 +1,23 @@
+En el mundo de las aves hay pinguinos que pesan 5 kg
+y aguilas que vuelan a 100 km/hora y pesan 20 kg
+
+abstract Ave
+    peso
+    velocidad
+Pinguino extends Ave
+Aguila extends Ave
+
+¿A que velocidad vuela el pinguino?
+
+Ave
+    Peso
+    AveVoladora
+        Velocidad
+    AveNoVoladora
+
+Pinguino:AveNoVoladora
+Augila:AveVoladora
+
+Crear una funcion que imprima cualquier ave
+otra funcuion que imprima solo las aves voladora
+otra function que imprima solo las no voladora

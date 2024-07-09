@@ -1,0 +1,22 @@
+Crea una funcion que imprima la fecha actual
+
+function printDate(){
+   console.log(new Date)
+}
+
+Esta funcion no se puede testear porque la fecha cambia
+en cada invocacion 
+
+S+D
+S->imprimir y crear una nueva fecha
+D->Dependencia fuerte de console.log
+
+//produccion
+function printDate(date,writer){
+    writer(date)
+}
+//test
+
+const date = new Date
+const writer = (d)=>console.log(d===date) //true
+printDate(date,writer)
