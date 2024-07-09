@@ -1,7 +1,7 @@
 package com.example;
 
 //import java.util.Set;
-import java.util.UUID;
+//import java.util.UUID;
 import java.util.function.Consumer;
 
 //import org.reflections.Reflections;
@@ -15,8 +15,8 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;*/
 import com.example.liskov.Aguila;
 import com.example.liskov.Pinguino;
 import com.example.liskov.Writer;
-import com.example.pizza.Ingredient;
-import com.example.pizza.Pizza;
+//import com.example.pizza.Ingredient;
+//import com.example.pizza.Pizza;
 
 //import jakarta.persistence.Entity;
 
