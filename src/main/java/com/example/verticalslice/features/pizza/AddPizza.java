@@ -1,53 +1,94 @@
 package com.example.verticalslice.features.pizza;
 
+import java.util.List;
+import java.util.UUID;
+
+import com.example.pizza.Ingredient;
 import com.example.pizza.Pizza;
 import com.example.segregation.Add;
 
 public class AddPizza {
-    //Request
-    public record Request() {
+    // Request
+    public record Request(
+            String name,
+            String description,
+            String url,
+            List<Ingredient> ingredients) {
     }
-    //Response
-    public record Response() {
+
+    // Response
+    public record Response(
+            UUID id,
+            String name,
+            String description,
+            String url,
+            Double price,
+            List<Ingredient> ingredients) {
     }
-    private final AddHandler useCase;
-    
-    protected AddPizza(final AddHandler useCase){
+
+    private final UseCase useCase;
+
+    protected AddPizza(final UseCase useCase) {
         this.useCase = useCase;
     }
-    Response add(Request req){
+
+    Response add(Request req) {
         return useCase.add(req);
     }
 
-    //UseCase
-    private interface AddHandler {
-    
+    // UseCase
+    private interface UseCase {
+
         Response add(Request req);
     }
-    private static class AddHanlderImpl implements AddHandler{
+
+    private static class UseCaseImpl implements UseCase {
 
         private final Add<Pizza> repository;
-        public AddHanlderImpl(final Add<Pizza> repository){
+
+        public UseCaseImpl(final Add<Pizza> repository) {
             this.repository = repository;
         }
+
         @Override
         public Response add(Request req) {
-            return null;
+
+            //Request->Entidad
+            var pizza = Pizza.create(
+                    UUID.randomUUID(), req.name(),
+                    req.description(), req.url());
+            for (var ingedient : req.ingredients()) {
+                pizza.addIngredient(ingedient);
+            }
+
+            repository.add(pizza);
+            //Entidad->Response
+            return new Response(
+                    pizza.getId(),
+                    pizza.getName(),
+                    pizza.getDescription(),
+                    pizza.getUrl(),
+                    pizza.getPrice(),
+                    pizza.getIngredients());
         }
 
     }
-    //Repository
-    private static class PizzaRepositoryAdd implements Add<Pizza> {
+
+    // Repository
+    private static class Repository implements Add<Pizza> {
 
         @Override
         public void add(Pizza entity) {
-            //persistir la pizza
-        }   
-        
+            // persistir la pizza
+        }
+
     }
-    public static AddPizza build(){
-        PizzaRepositoryAdd repository = new PizzaRepositoryAdd();        
-        var useCase = new AddHanlderImpl(repository);
+
+    public static AddPizza build() {
+        var repository = new Repository();
+        var useCase = new UseCaseImpl(repository);
         return new AddPizza(useCase);
     }
 }
+
+// Feature->AddPizza->UseCase->Repository
