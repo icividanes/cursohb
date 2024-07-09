@@ -8,7 +8,7 @@ import com.example.pizza.Pizza;
 import com.example.segregation.Add;
 
 public class AddPizza {
-    // Request
+    // Request->Input
     public record Request(
             String name,
             String description,
@@ -16,7 +16,7 @@ public class AddPizza {
             List<Ingredient> ingredients) {
     }
 
-    // Response
+    // Response->Output
     public record Response(
             UUID id,
             String name,
@@ -28,13 +28,15 @@ public class AddPizza {
 
     private final UseCase useCase;
 
+    //Controller
     protected AddPizza(final UseCase useCase) {
         this.useCase = useCase;
     }
 
-    Response add(Request req) {
+    public Response add(Request req) {
         return useCase.add(req);
     }
+    //endController
 
     // UseCase
     private interface UseCase {
@@ -54,13 +56,15 @@ public class AddPizza {
         public Response add(Request req) {
 
             //Request->Entidad
+            
             var pizza = Pizza.create(
                     UUID.randomUUID(), req.name(),
                     req.description(), req.url());
+
             for (var ingedient : req.ingredients()) {
                 pizza.addIngredient(ingedient);
             }
-
+            //persistencia
             repository.add(pizza);
             //Entidad->Response
             return new Response(
@@ -73,6 +77,7 @@ public class AddPizza {
         }
 
     }
+    //endUseCase
 
     // Repository
     private static class Repository implements Add<Pizza> {
@@ -83,7 +88,9 @@ public class AddPizza {
         }
 
     }
+    //EndRepository
 
+    //IOC->D(solid)
     public static AddPizza build() {
         var repository = new Repository();
         var useCase = new UseCaseImpl(repository);
@@ -91,4 +98,4 @@ public class AddPizza {
     }
 }
 
-// Feature->AddPizza->UseCase->Repository
+// Feature:AddPizza->UseCase->Repository

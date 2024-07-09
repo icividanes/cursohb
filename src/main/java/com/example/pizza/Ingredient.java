@@ -28,5 +28,10 @@ public class Ingredient extends EntityBase {
         return new Ingredient(id, name, price);
     }
 
+    @Override
+    public String toString() {
+        return "Ingredient [name=" + name + ", price=" + price + ", getId()=" + getId() + "]";
+    }
+
     
 }

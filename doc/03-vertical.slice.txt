@@ -34,3 +34,23 @@
 https://www.jimmybogard.com/vertical-slice-architecture/
 https://github.com/sizovs/PipelinR
 https://github.com/jbogard/MediatR
+
+Pros
+    Diferentes partes de un equipo podrían trabajar en diferentes useCase
+    Resolucion de nombres
+        AddPizza
+            useCase
+            repository
+    Mantenimiento->Te centras en un useCase
+    Test->
+        Unitarios(100%)
+            create->id,name,description,url, price =0, ingredients.length==0
+            update->name,description,url
+            addingredient->ingredients.length==1, price = coste + 1.2
+            removeingredient ingredientes.length =0 price =0
+        Funcionales(100%)
+            Request->Response
+Contras
+    Repetición de código
+            request,response
+
