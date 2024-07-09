@@ -1,0 +1,22 @@
+En el sistema existen clientes que se puedn:
+    Leer,Modificar,Eliminar,Crear
+En el sistema existen usuarios que solo se pueden leer
+    Leer
+
+public interface IRepository<T,ID>{
+    public T get(ID id);
+    public void add(T entity);
+    public void update(T entity);
+    public void remove(T entity);
+}
+
+class CustomerRepository implments IRepository<Customer,int>{
+    //nos va a obligar a implementar todos los metodos
+}
+class UserRepository implments IRepository<User,int>{
+    //nos va a obligar a implementar todos los metodos
+    add
+    update
+    remove
+        Exception
+}

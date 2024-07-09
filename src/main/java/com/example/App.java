@@ -15,8 +15,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;*/
 import com.example.liskov.Aguila;
 import com.example.liskov.Pinguino;
 import com.example.liskov.Writer;
+import com.example.segregation.CustomerRepository;
 //import com.example.pizza.Ingredient;
 //import com.example.pizza.Pizza;
+import com.example.segregation.ServiceCustomerUpdate;
 
 //import jakarta.persistence.Entity;
 
@@ -27,6 +29,11 @@ import com.example.liskov.Writer;
 public class App {
 
     public static void main(String[] args) {
+            
+        CustomerRepository repositoy = new CustomerRepository();
+        ServiceCustomerUpdate service = new ServiceCustomerUpdate(repositoy);
+        service.update();        
+
         Consumer<Object> mock = (obj)->{};
 
         Pinguino pinguino = new Pinguino(5);
