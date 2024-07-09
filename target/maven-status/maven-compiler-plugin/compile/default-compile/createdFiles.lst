@@ -1,1 +1,7 @@
+com\example\Events.class
 com\example\App.class
+com\example\pizza\Pizza$Builder.class
+com\example\pizza\PizzaBuilder.class
+com\example\pizza\EntityBase.class
+com\example\pizza\Pizza.class
+com\example\pizza\Ingredient.class
