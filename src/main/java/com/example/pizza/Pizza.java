@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 
 
- 
+
 public class Pizza extends EntityBase{
  
     private static final double PROFIT = 1.2D;
@@ -57,6 +57,7 @@ public class Pizza extends EntityBase{
     }
     
     public static Pizza create(UUID id, String name, String Description, String url){
+        //Lanzar evento
         return new Pizza(id, name, Description, url, new HashSet<>());
     }
 

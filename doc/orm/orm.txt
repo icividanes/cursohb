@@ -1,0 +1,102 @@
+Orm(Object relational mapping)
+
+    Impedance mismatch
+    https://en.wikipedia.org/wiki/Object%E2%80%93relational_impedance_mismatch
+
+Pizza->atributos+List<ingredients>
+
+BB.DD
+Pizza        Pizza-Ingredient(N:M)    Ingredient
+1            1  1                         1  
+             1  2                         2   
+
+//Modelo anemico
+class Pizza{
+
+}
+class PizzaIngredient{
+
+}
+class Ingredient{
+
+}
+
+Tipos
+
+    String->VARCHAR(50) NOT NULL
+Herencia
+    1. tipo en una columna de la bb.dd
+        Pinguino+atributos
+        Aguila+atributos
+    2. Tablas
+        Pinguinos
+        Aguilas
+
+¿Es un orm optimo para hacer querys?
+    No
+
+    Get->Memoria
+    Update->Memoria+bb.dd
+
+    Separar la responsabilidad de lectura de la responsabilidad de
+    escritura
+
+        get-id
+        update
+        remove
+        add
+
+    https://microservices.io/patterns/data/cqrs.html
+
+    NoSQL->No ORM
+    {
+        id
+        name
+        price
+        description
+        url
+        ingredients:[{
+            id,name
+        }]
+    }
+
+Patrones que tiene un orm
+    Repository
+        get
+        update
+        remove
+        add
+    UOW(Unit of work)
+        pizza
+        ingredients(7)
+
+        try
+            open()
+            begin()
+                insert into pizza
+                insert into pizza-ingredients
+            commit()
+        catch(ex){
+            roolback()
+        }
+        finally{
+            close()
+        }
+        https://martinfowler.com/eaaCatalog/unitOfWork.html
+
+Dialectos
+    Sql Server->Query
+    Oracle->Query
+Migrations(No)
+    create table ingredients(id,name varchar(50),price)
+    alter table ingre
+    https://www.baeldung.com/liquibase-refactor-schema-of-java-app
+
+    Codefirst->Migrations->ddl
+    DatabaseFirst->No migrations
+
+Mapeo
+    Anotaciones
+        @Entity
+    Xml
+        No utilizo
