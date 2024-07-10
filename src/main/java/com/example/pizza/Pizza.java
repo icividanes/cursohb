@@ -55,6 +55,7 @@ public class Pizza extends EntityBase{
     public void removeIngredient(Ingredient ingredient){
         ingredients.remove(ingredient);
     }
+    
     public static Pizza create(UUID id, String name, String Description, String url){
         return new Pizza(id, name, Description, url, new HashSet<>());
     }

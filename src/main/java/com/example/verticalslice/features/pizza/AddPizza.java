@@ -36,7 +36,7 @@ public class AddPizza {
     public Response add(Request req) {
         return useCase.add(req);
     }
-    //endController
+    //EndController
 
     // UseCase
     private interface UseCase {

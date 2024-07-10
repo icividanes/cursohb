@@ -3,9 +3,9 @@ package com.example;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-//import java.util.Set;
-//import java.util.UUID;
 import java.util.function.Consumer;
+
+
 
 //import org.reflections.Reflections;
 
@@ -20,13 +20,12 @@ import com.example.liskov.Pinguino;
 import com.example.liskov.Writer;
 import com.example.pizza.Ingredient;
 import com.example.segregation.CustomerRepository;
-//import com.example.pizza.Ingredient;
-//import com.example.pizza.Pizza;
 import com.example.segregation.ServiceCustomerUpdate;
+import com.example.verticalslice.features.ingredients.AddIngredient;
 import com.example.verticalslice.features.pizza.AddPizza;
 import com.example.verticalslice.features.pizza.AddPizza.Request;
 
-//import jakarta.persistence.Entity;
+
 
 /**
  * Hello world!
@@ -35,7 +34,9 @@ import com.example.verticalslice.features.pizza.AddPizza.Request;
 public class App {
 
     public static void main(String[] args) {
+
         addPizza();
+        addIngredient();
 
         CustomerRepository repositoy = new CustomerRepository();
         ServiceCustomerUpdate service = new ServiceCustomerUpdate(repositoy);
@@ -67,12 +68,22 @@ public class App {
         var response = AddPizza.build().add(req);
         System.out.println(response);
     }
+    public static void addIngredient(){
+        var request = new AddIngredient.Request("tomate", 1D);
+        var response = AddIngredient.build().add(request);
+        System.err.println(response);
+    }
     public static void setup() {
-        
-          /*final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+        /* 
+          //java.util.Set<Class<?>> set = new HashSet<>();
+          //Class<?>[] array = new Class<?>[set.size()];
+          
+
+          final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
           .build();
           
           SessionFactory sessionFactory = new MetadataSources(registry)
+          //.addAnnotatedClasses(set.toArray(array))
           .addAnnotatedClass(Events.class)
           .buildMetadata()
           .buildSessionFactory();
@@ -91,7 +102,7 @@ public class App {
           
           // var result = session.get(Events.class, 1);
           
-          session.close();*/
-         
+          session.close();
+        */         
     }
 }
