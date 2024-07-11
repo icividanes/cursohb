@@ -1,29 +1,17 @@
 package com.example;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.UUID;
-import java.util.function.Consumer;
 
 
 
-//import org.reflections.Reflections;
-
-/*import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;*/
-
-import com.example.liskov.Aguila;
-import com.example.liskov.Pinguino;
-import com.example.liskov.Writer;
 import com.example.pizza.Ingredient;
-import com.example.segregation.CustomerRepository;
-import com.example.segregation.ServiceCustomerUpdate;
+import com.example.pizza.Pizza;
 import com.example.verticalslice.features.ingredients.AddIngredient;
 import com.example.verticalslice.features.pizza.AddPizza;
 import com.example.verticalslice.features.pizza.AddPizza.Request;
+
+
 
 
 
@@ -34,7 +22,12 @@ import com.example.verticalslice.features.pizza.AddPizza.Request;
 public class App {
 
     public static void main(String[] args) {
-
+        addPizza();
+        //addIngredient();
+        /*var session = Configuration.creatSession();          
+        var repository = Configuration.<Events,Integer>createGetRepository(session, Events.class);
+        repository.get(1);
+        //setup();
         addPizza();
         addIngredient();
 
@@ -52,12 +45,19 @@ public class App {
         //Writer.printAvVoladora(pinguino);
         //Writer.printAvNoVoladora(aguila);
        Writer.printAvNoVoladora(pinguino,System.out::println);
-       Writer.printAvVoladora(aguila,System.out::println);
-    }
-    public static void addPizza(){
-        List<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(Ingredient.create(UUID.randomUUID(), "tomate", 1D));
-        ingredients.add(Ingredient.create(UUID.randomUUID(), "queso", 1.5D));
+       Writer.printAvVoladora(aguila,System.out::println);*/
+    }    
+    public static void addPizza(){ 
+
+        
+        var session = Configuration.creatSession();
+        
+        var repository = Configuration.<Pizza>createAddRepository(session);
+        var repositoryIngredient = Configuration.<Ingredient,UUID>createGetRepository(session, Ingredient.class);
+        var sql = "select i.id from Ingredient i";
+        var query = session.createQuery(sql,UUID.class);                
+        var ingredients = query.list();
+        
 
         Request req = new Request(
             "carbonara", 
@@ -65,44 +65,24 @@ public class App {
             "url", 
             ingredients);
 
-        var response = AddPizza.build().add(req);
+        var response = AddPizza.build(repository,repositoryIngredient).add(req);
         System.out.println(response);
+        Configuration.UOW(session);
     }
     public static void addIngredient(){
-        var request = new AddIngredient.Request("tomate", 1D);
-        var response = AddIngredient.build().add(request);
-        System.err.println(response);
-    }
-    public static void setup() {
-        /* 
-          //java.util.Set<Class<?>> set = new HashSet<>();
-          //Class<?>[] array = new Class<?>[set.size()];
-          
-
-          final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-          .build();
-          
-          SessionFactory sessionFactory = new MetadataSources(registry)
-          //.addAnnotatedClasses(set.toArray(array))
-          .addAnnotatedClass(Events.class)
-          .buildMetadata()
-          .buildSessionFactory();
-          
-          Session session = sessionFactory.openSession();          
-          
-          var tr = session.beginTransaction();
-          
-          Events events = new Events();
-          events.id = 1;          
-          session.persist(events);
-          // var result = session.get(Events.class, 1);
-          // session.remove(events);
-          
-          tr.commit();
-          
-          // var result = session.get(Events.class, 1);
-          
-          session.close();
-        */         
-    }
+        var session = Configuration.creatSession();
+        try{
+            var request = new AddIngredient.Request("queso", 1D);            
+            var repository = Configuration.<Ingredient>createAddRepository(session);
+            var response = AddIngredient.build(repository).add(request);                
+            Configuration.UOW(session);
+            System.out.println(response);
+        }
+        catch(Exception ex){
+            Configuration.closeSession(session);
+        }
+        
+        
+      }
+   
 }

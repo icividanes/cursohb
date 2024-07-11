@@ -6,6 +6,7 @@ import java.util.UUID;
 import com.example.pizza.Ingredient;
 import com.example.pizza.Pizza;
 import com.example.segregation.Add;
+import com.example.segregation.Get;
 
 public class AddPizza {
     // Request->Input
@@ -13,7 +14,7 @@ public class AddPizza {
             String name,
             String description,
             String url,
-            List<Ingredient> ingredients) {
+            List<UUID> ingredients) {
     }
 
     // Response->Output
@@ -23,8 +24,9 @@ public class AddPizza {
             String description,
             String url,
             Double price,
-            List<Ingredient> ingredients) {
+            List<IngredientResponse> ingredients) {
     }
+    public record IngredientResponse(UUID id,String name){}
 
     private final UseCase useCase;
 
@@ -47,55 +49,51 @@ public class AddPizza {
     private static class UseCaseImpl implements UseCase {
 
         private final Add<Pizza> repository;
-
-        public UseCaseImpl(final Add<Pizza> repository) {
+        private final Get<Ingredient,UUID> repositoryIngredient;
+        public UseCaseImpl(
+            final Add<Pizza> repository,
+            final Get<Ingredient,UUID> repositoryIngredient
+        ) {
             this.repository = repository;
+            this.repositoryIngredient = repositoryIngredient;
         }
 
         @Override
         public Response add(Request req) {
 
-            //Request->Entidad
-            
+            //Request->Entidad            
             var pizza = Pizza.create(
                     UUID.randomUUID(), req.name(),
                     req.description(), req.url());
-
-            for (var ingedient : req.ingredients()) {
-                pizza.addIngredient(ingedient);
+            for (var ingedientId : req.ingredients()) {
+                pizza.addIngredient(repositoryIngredient.get(ingedientId));
             }
             //persistencia
             repository.add(pizza);
             //Entidad->Response
+            
+            var ingrediensResponse = pizza.getIngredients().stream()
+                .map(i->new IngredientResponse(i.getId(), i.getName()))
+                .toList();
+
             return new Response(
                     pizza.getId(),
                     pizza.getName(),
                     pizza.getDescription(),
                     pizza.getUrl(),
                     pizza.getPrice(),
-                    pizza.getIngredients());
+                    ingrediensResponse);
         }
 
     }
-    //endUseCase
-
-    // Repository
-    private static class Repository implements Add<Pizza> {
-
-        @Override
-        public void add(Pizza entity) {
-            // persistir la pizza
-        }
-
-    }
-    //EndRepository
+    //endUseCase    
+    
 
     //IOC->D(solid)
-    public static AddPizza build() {
-        var repository = new Repository();
-        var useCase = new UseCaseImpl(repository);
+    public static AddPizza build(Add<Pizza> repository, Get<Ingredient,UUID> repositoryIngredient) {        
+        var useCase = new UseCaseImpl(repository, repositoryIngredient);
         return new AddPizza(useCase);
     }
 }
 
-// Feature:AddPizza->UseCase->Repository
+// Feature:AddPizza->UseCase

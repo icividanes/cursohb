@@ -2,8 +2,13 @@ package com.example.pizza;
 
 import java.util.UUID;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
 public abstract class EntityBase {
     
+    @Id
     private UUID id; //atributos
     protected EntityBase(UUID id){ //constructor
         this.id = id;

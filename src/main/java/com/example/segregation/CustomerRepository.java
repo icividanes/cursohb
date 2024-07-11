@@ -7,10 +7,7 @@ public class CustomerRepository implements Repository<Customer,Integer> {
         
     }
 
-    @Override
-    public void update(Customer entity) {
-        
-    }
+   
 
     @Override
     public Customer get(Integer id) {

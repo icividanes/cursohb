@@ -47,30 +47,12 @@ public class AddIngredient {
 
         }
 
-    }
-    //Repositorio
-    private static class Repository implements Add<Ingredient>{
-
-        @Override
-        public void add(Ingredient entity) {
-           
-        }
-        
-    }
-    public static AddIngredient build(){
-        var repository = new Repository();
+    }   
+    public static AddIngredient build(Add<Ingredient> repository){                
         var useCase = new UseCaseImpl(repository);
         return new AddIngredient(useCase);
     }
     
 }
 
-//Input record
-//Output
-
-//Controller
-//UseCase
-//Repository
-
-//IOC
 

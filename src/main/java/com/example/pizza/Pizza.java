@@ -6,17 +6,25 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 
+@Entity
+@Table(name="Pizzas")
 public class Pizza extends EntityBase{
  
     private static final double PROFIT = 1.2D;
     private String name;   
     private String description;
     private String url;
+    @ManyToMany
     private Set<Ingredient> ingredients;
  
- 
+    protected Pizza(){
+        super(null);
+    }
     protected Pizza(UUID id, String name, String description, String url, Set<Ingredient> ingredients) {
         super(id);
         this.name = name;        
