@@ -48,16 +48,16 @@ public class App {
        Writer.printAvNoVoladora(pinguino,System.out::println);
        Writer.printAvVoladora(aguila,System.out::println);*/
     }    
-    public static void addPizza(){ 
-
+    public static void addPizza(){       
+        
+        var sql = "select i.id from Ingredient i";
+        var ingredients = Configuration.query(sql, UUID.class);       
         
         var session = Configuration.creatSession();
         
         var repository = Configuration.<Pizza>createAddRepository(session);
         var repositoryIngredient = Configuration.<Ingredient,UUID>createGetRepository(session, Ingredient.class);
-        var sql = "select i.id from Ingredient i";
-        var query = session.createQuery(sql,UUID.class);                
-        var ingredients = query.list();
+       
         
 
         Request req = new Request(
