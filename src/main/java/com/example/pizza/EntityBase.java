@@ -10,6 +10,7 @@ public abstract class EntityBase {
     
     @Id
     private UUID id; //atributos
+    protected EntityBase(){}
     protected EntityBase(UUID id){ //constructor
         this.id = id;
     }

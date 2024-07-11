@@ -12,8 +12,8 @@ public class Ingredient extends EntityBase {
     private String name;
     private Double price;
     protected Ingredient(){
-        super(null);
-    }    
+        super();
+    }   
     protected Ingredient(UUID id, String name, Double price) {
         super(id);        
         this.name = name;
