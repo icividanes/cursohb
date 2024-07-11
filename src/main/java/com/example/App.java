@@ -22,6 +22,7 @@ import com.example.verticalslice.features.pizza.AddPizza.Request;
 public class App {
 
     public static void main(String[] args) {
+        addIngredient();
         addPizza();
         //addIngredient();
         /*var session = Configuration.creatSession();          
