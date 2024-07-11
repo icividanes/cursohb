@@ -20,11 +20,10 @@ public class Pizza extends EntityBase{
     private String description;
     private String url;
     @ManyToMany
-    private Set<Ingredient> ingredients;
- 
+    private Set<Ingredient> ingredients; 
     protected Pizza(){
-        super(null);
-    }
+        super();
+    }   
     protected Pizza(UUID id, String name, String description, String url, Set<Ingredient> ingredients) {
         super(id);
         this.name = name;        
