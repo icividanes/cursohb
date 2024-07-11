@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
@@ -19,6 +20,7 @@ import com.example.segregation.Remove;
 import jakarta.persistence.Entity;
 
 public class Configuration {
+    
     private static Class<?>[] getAnottationClass() {
         Reflections reflections = new Reflections("com.example");
         Set<Class<?>> importantClasses = reflections.getTypesAnnotatedWith(Entity.class);
@@ -26,6 +28,7 @@ public class Configuration {
         return importantClasses.toArray(clazz); 
     }
 
+    
     private static SessionFactory createSesionFactory(){
          final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
           .build();
@@ -35,6 +38,7 @@ public class Configuration {
           .buildSessionFactory();
     }
     public static Session creatSession(){
+        
         var session = createSesionFactory().openSession();                
         return session;
     }
@@ -87,6 +91,12 @@ public class Configuration {
                 session.remove(entity);
             }            
         };
+    }
+    public static <T> List<T> query(String sql, Class<T> entiClass){
+        var session = creatSession();
+        var result =  session.createQuery(sql, entiClass).list();
+        closeSession(session);
+        return result;
     }
     
 }
